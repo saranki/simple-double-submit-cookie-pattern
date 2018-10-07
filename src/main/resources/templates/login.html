@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<form class="login-form" action="#" th:action="@{/login}" th:object="${login}" method="POST">
+		<h2 class="login-text">Login</h2>
+		<p class="login-text">
+			<span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i
+				class="fa fa-lock fa-stack-1x"></i>
+			</span>
+		</p>
+		<div>
+			<input type="text" class="login-username" name="username" th:field="*{username}" id="username"
+				autofocus required placeholder="Username" />
+		</div>
+		<div>
+			<input type="password" class="login-password" required name="password" th:field="*{password}"
+				id="password" placeholder="Password" />
+		</div>
+		<input type="submit" name="Login" value="Login" class="login-submit" />
+	</form>
+	<div class="underlay-photo"></div>
+	<div class="underlay-black"></div>
+</body>
+</html>
