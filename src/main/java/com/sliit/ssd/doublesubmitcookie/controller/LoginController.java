@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.sliit.ssd.doublesubmitcookie.controller;
 
 import java.security.NoSuchAlgorithmException;
@@ -23,14 +20,13 @@ import com.sliit.ssd.doublesubmitcookie.model.User;
 import com.sliit.ssd.doublesubmitcookie.service.AuthenticationService;
 import com.sliit.ssd.doublesubmitcookie.util.HashUtil;
 
-
-
 /**
  * @author Saranki
  *
  */
 @Controller
 public class LoginController {
+	
 	@Autowired
 	AuthenticationService authenticationService;
 
@@ -38,7 +34,15 @@ public class LoginController {
 	HashUtil hashUtil;
 
 	private static Logger logger = LoggerFactory.getLogger(LoginController.class);
-
+	
+	/**
+	 * If the user is authenticated he will be redirected to transfer page of
+	 * not will be redirected to login page
+	 * 
+	 * @param model
+	 * @param request
+	 * @return login or transfer page based on the condition
+	 */
 	@GetMapping("/")
 	public String loadPage(Model model, HttpServletRequest request) {
 		if (!authenticationService.isUserAuthenticated(request.getCookies())) {
@@ -48,12 +52,30 @@ public class LoginController {
 		}
 	}
 	
+	/**
+	 * Binding the user object attributes to Thymleaf
+	 * 
+	 * @param model
+	 * @return login page
+	 */
 	@GetMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("login", new User());
 		return "login";
 	}
 
+	/**
+	 * If the user is authenticated successfully 3 cookies will be generated.
+	 * 1. Session cookie to store session details
+	 * 2. User cookie to store user details for a particular session
+	 * 3. CSRF token cookie in which csrf token is attached. This token will be 
+	 * later embedded into the form as a hidden field which will be sent through a POST request 
+	 * 
+	 * @param user
+	 * @param servletResponse
+	 * @param model
+	 * @return transfer page if conditions are fulfilled
+	 */
 	@PostMapping("/login")
 	public String login(@ModelAttribute User user, HttpServletResponse servletResponse, Model model) {
 
@@ -65,7 +87,6 @@ public class LoginController {
 				String sessionID = authenticationService.generateCredentialsToUser(username);
 				String csrfToken = authenticationService.generateCSRFToken(sessionID);
 				
-				// Set it in the set-cookie header
 				Cookie sessionCookie = new Cookie("sessionID", sessionID);
 				Cookie userCookie = new Cookie("username", username);
 				Cookie tokenCookie = new Cookie("csrf", csrfToken);

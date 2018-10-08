@@ -5,17 +5,19 @@
 <meta charset="UTF-8">
 <title>Money Transfer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="css/home.css">
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="css/bootstrap.css">
 </head>
 
 <body>
 	<div class="container">
 		<div class="row header">
-			<h1>Money Transfer &nbsp;</h1>
-			<h3>Transfer the money with just one click!</h3>
+			<h1>Money Transfer</h1>
 		</div>
 		<div class="row body">
 			<form action="#" th:action="@{/transfer}" th:object="${transfer}" method="post">
@@ -27,7 +29,6 @@
 									th:field="*{accountNumber}" name="account_number" placeholder="Account Number" /></small> <br>
 							</p>
 						</div>
-
 						<div>
 							<p class="left">
 								<label for="sender_account_number">Sender's A/C Number</label> <small><input
@@ -35,7 +36,6 @@
 									placeholder="Sender's Account Number" /></small> <br>
 							</p>
 						</div>
-
 						<div>
 							<p class="left">
 								<label for="amount">Transfer Amount</label> <small><input type="text" name="amount"
@@ -43,62 +43,15 @@
 							</p>
 						</div>
 					</li>
-					<li><input class="btn btn-submit" type="submit" value="Submit" id="btn-submit" /> <small>or
-							press <strong>enter</strong>
-					</small></li>
+					<li><input class="btn btn-submit" type="submit" value="Submit" id="btn-submit" /></li>
 				</ul>
 			</form>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		window.addEventListener('load', function() {
-			let csrf = getCookie("csrf");
-			$("#btn-submit").before(
-					'<input type="hidden" name="csrf" value="' + csrf + '">');
-			checkStatus();
-		});
-
-		function getCookie(cname) {
-			var name = cname + "=";
-			var decodedCookie = decodeURIComponent(document.cookie);
-			var ca = decodedCookie.split(';');
-			for (var i = 0; i < ca.length; i++) {
-				var c = ca[i];
-				while (c.charAt(0) == ' ') {
-					c = c.substring(1);
-				}
-				if (c.indexOf(name) == 0) {
-					return c.substring(name.length, c.length);
-				}
-			}
-			return "";
-		}
-
-		function checkStatus() {
-			if (getParameterByName("status")
-					&& getParameterByName("status") === "failed") {
-				alert("Failure\nThe transaction was not completed!");
-
-			} else if (getParameterByName("status")
-					&& getParameterByName("status") === "success") {
-				alert("Success\nThe transaction was completed successfully!!!");
-
-			}
-		}
-		function getParameterByName(name, url) {
-			if (!url)
-				url = window.location.href;
-			name = name.replace(/[\[\]]/g, '\\$&');
-			var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex
-					.exec(url);
-			if (!results)
-				return null;
-			if (!results[2])
-				return '';
-			return decodeURIComponent(results[2].replace(/\+/g, ' '));
-		}
-	</script>
+	<script src="js/jquery.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/bootbox.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </body>
-
 </html>
