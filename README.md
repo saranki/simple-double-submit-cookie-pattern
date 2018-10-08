@@ -1,4 +1,3 @@
-simple-double-submit-cookie-patter
 ### Double Submit Cookie Pattern
 
 A simple money transfer application to demo the Double Submit Cookie Pattern flow in a web application that might encounter CSRF attacks.
