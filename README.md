@@ -9,4 +9,4 @@ A simple money transfer application to demo the Double Submit Cookie Pattern flo
 3.  The application is accessible at localhost:8080
 4.  Use username as  **master**  and password as  **admin123**  to login
 
-#### For more details visit [this blog](https://medium.com/@m.saranki/double-submit-cookie-pattern-smart-people-always-double-check-their-work-1329f5e57389) on Synchronizer Token Pattern
+#### For more details visit [this blog](https://medium.com/@m.saranki/double-submit-cookie-pattern-smart-people-always-double-check-their-work-1329f5e57389) on Double Submit Cookie Pattern
